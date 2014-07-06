@@ -1,0 +1,34 @@
+body {
+    background: url('http://namonitore.ru/uploads/catalog/nature/fioletovaya_groza_1600.jpg');
+}
+.main {
+    margin-top: 15px;
+    margin-left:15px;
+}
+.task {
+    background: #CC00CC;
+    border: 3px solid black;
+    padding:8px 8px;
+}
+li {
+    color:#ccff00;
+    font-size: 16px;
+}
+.nth {
+    color: white;
+    margin-left: 10px;
+    margin-top: 15px;
+    font-size: 19px;
+    font-weight: bold;
+    display: inline-block;
+}
+.but {
+    padding: 5px 8px;
+    margin-left:13px;
+}
+.all {
+    margin-left: 50px;
+    position: absolute;
+    top: 70px;
+    left:130px;
+}
