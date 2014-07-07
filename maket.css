@@ -29,6 +29,7 @@ body {
 	float: left;
 	height: 320px;
 	width: 15%;
+	position:relative;
 }
 .button {
 	color:white;
@@ -60,4 +61,10 @@ body {
 }
 .active {
 	background-color: #e31e15;
+}
+.submenu {
+	position: absolute;
+	top: 140px;
+	right: -100%;
+	display:none;
 }
