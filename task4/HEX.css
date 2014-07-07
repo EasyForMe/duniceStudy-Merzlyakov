@@ -1,0 +1,16 @@
+body {
+    background-color: #330033;
+}
+.main {
+    margin-top: 15px;
+    margin-left:15px;
+}
+.task {
+    background: #CC00CC;
+    border: 3px solid black;
+    padding:8px 8px;
+}
+.but {
+    padding: 5px 8px;
+    margin-left:13px;
+}
