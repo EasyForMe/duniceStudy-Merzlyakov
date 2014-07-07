@@ -1,0 +1,63 @@
+body {
+	padding: 0px;
+	margin: 0px;
+}
+.main {
+	font-size: 24px;
+	padding-top:30px;
+	padding-left:20px;
+	margin-left: 16%;
+}
+.header {
+	background-color: #212121;
+	height: 50px;
+	padding-left: 15px;
+	padding-top: 20px;
+	padding-right: 15px;
+	color:white;
+	font-size: 22px;
+	vertical-align: middle;
+}
+.red {
+	color: #f73b36;
+}
+.red, .white {
+	vertical-align: middle;
+}
+.left {
+	background-color: #3d3d3d;
+	float: left;
+	height: 320px;
+	width: 15%;
+}
+.button {
+	color:white;
+	border-bottom: 2px solid #5b5b5b;
+	padding: 15px;
+}
+.right {
+	float:right;
+	width: 30%;
+	padding-top: 20px;
+}
+.up {
+	float:right;
+	font-size: 16px;
+
+}
+.input {
+	padding: 10px 5px;
+	margin-left: 15px;
+}
+.right-list {
+	padding: 8px 2px;
+}
+.assign {
+	width:160px;
+}
+.title {
+	width:170px;
+}
+.active {
+	background-color: #e31e15;
+}
