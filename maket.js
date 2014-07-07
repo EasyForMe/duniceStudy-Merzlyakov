@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	$('div').click( function() {
-		$(this).addClass('active');
-	});
+     $(document).on('click', 'div', function(){
+           $(this).remove();
+            });
 });
