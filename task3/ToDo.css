@@ -1,5 +1,9 @@
 body {
-    background: url('http://namonitore.ru/uploads/catalog/nature/fioletovaya_groza_1600.jpg');
+    background: url('http://namonitore.ru/uploads/catalog/nature/fioletovaya_groza_1600.jpg') no-repeat;
+    -moz-background-size: 100%;
+    -webkit-background-size: 100%;
+    -o-background-size: 100%; 
+    background-size: 100%;
 }
 .main {
     margin-top: 15px;
