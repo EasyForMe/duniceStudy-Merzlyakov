@@ -1,0 +1,27 @@
+<DOCTYPE! html>
+<html>
+<head>
+	<title>Task</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet", href="event.css">
+</head>
+	<body>
+		<h1>Список задач</h1>
+
+		<form action="" id="add">
+			<input type="text" placeholder="NOVIY QUEST">
+			<input type="submit" value="ADD QUEST">
+		</form>
+		<div class="task">
+			<script type="text/template" id ="taskTemplate">
+			<span><%= title %> Приоритет: <%= priority %></span> <button class="edit">Edit</button> <button class="del">Del</button>
+			</script>
+		</div>
+		<!-- <input type="button" class="priority" value="Расположить задачи по приоритету"> -->
+	<script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript" src="underscore.js"></script>
+	<script type="text/javascript" src="backbone.js"></script>
+	<script type="text/javascript" src="backbone.localStorag.js"></script>
+	<script src="event.js"></script>
+	</body>
+</html>
