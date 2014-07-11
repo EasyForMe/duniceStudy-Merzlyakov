@@ -3,20 +3,25 @@
 <head>
 	<title>Test</title>
 	<meta charset="utf-8">
-  <link rel="stylesheet" href="">
+  <link rel="stylesheet" href="test.css">
 </head>
 	<body>
-		
-		<section>
-  <form id="form" action="#" method="POST">
-  <input id="description" name="description" type="text" />
-  <input id="add" type="submit" value="Add" />
-  <button id="clear">Clear All</button>
-  </form>
-  <div id="alert"></div>
-  <ul id="todos"></ul>
-</section>
-	
+		<!-- Вид приложения-->
+	<div id="main">
+	<h1>Список задач</h1>
+		<form action="" id="add">
+			<input type="text" placeholder="NOVIY QUEST">
+		</form>
+		<ul class="spisok">
+		</ul>
+		<input type="button" value="STERET' NU PROSTO VSE!!" class="delall">
+	</div>
+
+		<!-- Скрипт для элемента списка -->
+		<script type="text/template" id ="todoli">
+			<label><input type="checkbox" class="check"><%= title %></label> <button class="edit">Edit</button> <button class="del">Del</button>
+		</script>
+
 	<script src="json2.js"></script>
 	<script type="text/javascript" src="jquery.js"></script>
 	<script src="underscore.js"></script>
