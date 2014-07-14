@@ -13,8 +13,7 @@ $(function() {
   App.Models.Todo = Backbone.Model.extend({
     defaults: {
       title: "TI JE NICHO NE NAPISAL!!",
-      done: false,
-      //order: todoCollection.nextOrder()
+      done: false
     },
     initialize: function() {
       if (!$.trim(this.get("title"))) {
@@ -22,46 +21,43 @@ $(function() {
       }
     },
     toggle: function() {
-      this.save({done: !this.get('done')});
-    },
-    clear: function() {
-      this.destroy();
+      this.save({done: !this.get("done")});
     }
   });
-  //var Todo = new App.Models.Todo;
 
   App.Views.Todo = Backbone.View.extend({
     tagName: 'li',
     template: template('todoli'),
+    className: 'lil',
 
     initialize: function() {
       this.model.on('destroy', this.remove, this);
-      //this.model.on('change', this.render, this);
-      this.model.bind('change', this.render, this);
+      this.model.on('all', this.render, this);
     },
     render: function() {
       var template = this.template(this.model.toJSON());
       this.$el.html( template );
+      if(this.model.get('done')) {
+        this.$el.addClass("checked");
+      }
       return this;
     },
     events: {
       'click .edit': 'edit',
-      'click .del': 'clear',
-      "click .check"   : "toggleDone"
+      'click .del': 'del',
+      'click .check': 'check'
     },
-   // del: function() {
-     // this.model.destroy();
-    //},
+   del: function() {
+     this.model.destroy();
+    },
     edit: function() {
       var editTodo = prompt('CHO MENYAEM?', this.model.get('title'));
       this.model.set('title', editTodo);
       this.model.save();
     },
-    toggleDone: function() {
+    check: function() {
+      this.$el.toggleClass("checked");
       this.model.toggle();
-    },
-    clear: function() {
-      this.model.clear();
     }
 
   });
@@ -71,22 +67,31 @@ $(function() {
     localStorage: new Store("todos")
 
   });
-  var todoCollection = new App.Collections.Todo;
+  window.todoCollection = new App.Collections.Todo;
 
   App.Views.All = Backbone.View.extend({
 
     el: '#main',
     initialize: function() {
       this.collection.on('add', this.addOne, this);
-      this.collection.on('remove', this.render, this);
+      this.collection.on('all', this.render, this);
       todoCollection.fetch()
     },
     events: {
       'submit' : 'sub',
-      'click .delall' : 'delall'
+      'click .checkall' : 'checkall',
+      'click .delcheck' : 'delcheck',
+      'click .todoDone' : 'todoDone',
+      'click .todoUndone' : 'todoUndone',
+      'click .todoAll' : 'todoAll'
     },
     render: function() {
-       console.log('CHTOTO');
+      if(this.collection.length) {
+        $('.butoni').show();
+      }
+      else {
+        $('.butoni').hide();
+      }
     },
     sub: function(e) {
       e.preventDefault();
@@ -99,14 +104,35 @@ $(function() {
       var todoView = new App.Views.Todo({model:todo});
       $('.spisok').append(todoView.render().el);
     },
-    delall: function() {
-      this.collection.reset();
-      localStorage.clear();
+    checkall: function(){
+    var noDone = this.collection.where({done: false});
+    _.each(noDone, function(model) {
+    model.toggle(); });
+    },
+    delcheck: function() {
+      var red = this.collection.where({done: true});
+    _.each(red, function(model) {
+    model.destroy(); });
+    },
+    todoDone: function() {
+      if($('li').hasClass('checked')) {
+        $('li').hide();
+        $('.checked').show();
+      }
+    },
+    todoUndone: function() {
+      if($('li').hasClass('checked')) {
+        $('li').show();
+        $('.checked').hide();
+      }
+    },
+    todoAll: function() {
+      $('li').show();
     }
 
   });
 
-  window.todoViews = new App.Views.All({collection: todoCollection});
+  window.todoViews = new App.Views.All({collection:todoCollection});
   
 
 });

@@ -14,15 +14,21 @@
 		</form>
 		<ul class="spisok">
 		</ul>
-		<input type="button" value="STERET' NU PROSTO VSE!!" class="delall">
+		<div class="butoni">
+			<input type="button" value="MAMA YA SDELAL VSE UROKI! MOJNO MNE POGULYAT'??" class="checkall">
+			<input type="button" value="UDALIT KRASNEN'KIE" class="delcheck">
+			<input type="button" class="todoDone" value="POKAZAT TOLKO KRASNEN'KIE">
+			<input type="button" class="todoUndone" value="POKAZAT CHO MUTIT'">
+			<input type="button" class="todoAll" value="POKAZAT VSE">
+		</div>
 	</div>
 
 		<!-- Скрипт для элемента списка -->
 		<script type="text/template" id ="todoli">
-			<label><input type="checkbox" class="check"><%= title %></label> <button class="edit">Edit</button> <button class="del">Del</button>
+			<input type="checkbox" class="check"><label><%= title %></label> <button class="edit">Edit</button> <button class="del">Del</button>
 		</script>
 
-	<script src="json2.js"></script>
+	<!--<script src="json2.js"></script>-->
 	<script type="text/javascript" src="jquery.js"></script>
 	<script src="underscore.js"></script>
 	<script src="backbone.js"></script>
