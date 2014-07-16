@@ -127,22 +127,12 @@ $(function() {
     model.destroy(); });
     },
     todoDone: function() {
-      if($('li').hasClass('checked')) {
         $('li').hide();
         $('.checked').show();
-      }
-      else {
-        $('li').hide();
-      }
     },
     todoUndone: function() {
-      if($('li').hasClass('checked')) {
         $('li').show();
         $('.checked').hide();
-      }
-      else {
-        $('li').show();
-      }
     },
     todoAll: function() {
       $('li').show();
