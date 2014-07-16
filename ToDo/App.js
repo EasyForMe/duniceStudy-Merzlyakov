@@ -1,58 +1,156 @@
 $(function() {
 
-	window.App = {
-		Models: {},
-		Views: {},
-		Collections: {}
-	};
-	window.template = function(id) {
-		return _.template($('#' +id).html());
-	};
+  window.App = {
+    Models: {},
+    Views: {},
+    Collections: {}
+  };
 
-	App.Models.Todo = Backbone.Model.extend({
-		initialize: function() {
-			console.log('Hello MAZAFAKERI!!');
-		},
-		defaults: {
-			count: 1,
-			name: "Stepan"
-		}
-	});
+  window.template = function(id) {
+    return _.template($('#' +id).html());
+  };
 
-	App.Views.Todo = Backbone.View.extend({
-		template: template('taskTemplate'),
-		initialize: function() {
-			this.model.on('change', this.render, this);
-		},
-		tagName: 'span',
-		className: 'text',
-		id: '22',
-		render: function() {
-			var template = this.template(this.model.toJSON());
-			this.$el.html( template );
-			return this;
-		},
-		events: {
-			'click .but': 'schet'
-		},
-		schet: function() {
-			var all = this.model.get('count')+1;
-			this.model.set('count', all, {validate:true});
-			this.model.set('name', 'JORA');
-			var todos = this.model.attributes;
-   			localStorage.setItem('todos', todos);
-   			return false;
-		}
-	});
+  App.Models.Todo = Backbone.Model.extend({
+    defaults: {
+      title: "TI JE NICHO NE NAPISAL!!",
+      done: false
+    },
+    initialize: function() {
+      if (!$.trim(this.get("title"))) {
+        this.set({"title": this.defaults.title});
+      }
+    },
+    toggle: function() {
+      this.save({done: !this.get("done")});
+    }
+  });
 
-	window.todo = new App.Models.Todo;
-	window.todoView = new App.Views.Todo({model:todo});
+  App.Views.Todo = Backbone.View.extend({
+    tagName: 'li',
+    template: template('todoli'),
+    className: 'lil',
 
-	$('.main').append(todoView.render().el);
+    initialize: function() {
+      this.model.on('destroy', this.remove, this);
+      this.model.on('all', this.render, this);
+    },
+    render: function() {
+      var template = this.template(this.model.toJSON());
+      this.$el.html( template );
+      if(this.model.get('done')) {
+        this.$el.addClass("checked");
+      }
+      else {
+        this.$el.removeClass("checked");
+      }
+      return this;
+    },
+    events: {
+      'click .edit': 'edit',
+      'click .del': 'del',
+      'click .check': 'check'
+    },
+   del: function() {
+     this.model.destroy();
+    },
+    edit: function() {
+      var editTodo = prompt('CHO MENYAEM?', this.model.get('title'));
+      this.model.set('title', editTodo);
+      this.model.save();
+    },
+    check: function() {
+      this.$el.toggleClass("checked");
+      this.model.toggle();
+    }
 
-	$('.clear').click( function() {
-	window.localStorage.clear();
-	//location.reload();
-	return false;
-	});
+  });
+
+  App.Collections.Todo = Backbone.Collection.extend({
+    model: App.Models.Todo,
+    localStorage: new Store("todos")
+
+  });
+  window.todoCollection = new App.Collections.Todo;
+
+  App.Views.All = Backbone.View.extend({
+
+    el: '#main',
+    initialize: function() {
+      this.collection.on('add', this.addOne, this);
+      this.collection.on('all', this.render, this);
+      todoCollection.fetch()
+    },
+    events: {
+      'submit' : 'sub',
+      'click .checkall' : 'checkall',
+      'click .delcheck' : 'delcheck',
+      'click .todoDone' : 'todoDone',
+      'click .todoUndone' : 'todoUndone',
+      'click .todoAll' : 'todoAll'
+    },
+    render: function() {
+      if(this.collection.length) {
+        $('.butoni').show();
+      }
+      else {
+        $('.butoni').hide();
+      }
+    },
+    sub: function(e) {
+      e.preventDefault();
+      var todoit = $(e.currentTarget).find('input[type=text]').val();
+      var newTodo = new App.Models.Todo({'title': todoit});
+      this.collection.add(newTodo);
+      newTodo.save();
+    },
+    addOne: function(todo) {
+      var todoView = new App.Views.Todo({model:todo});
+      $('.spisok').append(todoView.render().el);
+    },
+    checkall: function(){
+    var noDone = this.collection.where({done: false});
+    var oDone = this.collection.where({done: true});
+    if(this.collection.length == oDone.length) {
+      $('.checkall').removeClass('redd');
+      _.each(oDone, function(model) {
+    model.toggle(); });
+    }
+      else {
+      //$('.checkall').addClass('redd');
+    _.each(noDone, function(model) {
+    model.toggle(); });
+  };
+    },
+    delcheck: function() {
+      var red = this.collection.where({done: true});
+    _.each(red, function(model) {
+    model.destroy(); });
+    },
+    todoDone: function() {
+      if($('li').hasClass('checked')) {
+        $('li').hide();
+        $('.checked').show();
+      }
+      else {
+        $('li').hide();
+      }
+    },
+    todoUndone: function() {
+      if($('li').hasClass('checked')) {
+        $('li').show();
+        $('.checked').hide();
+      }
+      else {
+        $('li').show();
+      }
+    },
+    todoAll: function() {
+      $('li').show();
+    }
+
+  });
+
+  window.todoViews = new App.Views.All({collection:todoCollection});
+  
+
 });

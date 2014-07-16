@@ -1,9 +1,13 @@
-.but {
-	padding: 10px;
-	background-color: black;
+ul {
+	list-style: none;
+}
+.checked {
+	text-decoration: line-through;
 	color: red;
 }
-.text {
-	color: yellow;
-	background-color: red;
+button, input {
+	padding:6px;
+}
+.redd {
+	color:red;
 }
