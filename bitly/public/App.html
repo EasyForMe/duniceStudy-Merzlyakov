@@ -1,0 +1,38 @@
+<DOCTYPE! html>
+<html>
+<head>
+	<title>ToDo List</title>
+	<meta charset="utf-8">
+  <link rel="stylesheet" href="App.css">
+</head>
+	<body>
+		<!-- Вид приложения-->
+	<div id="main">
+	<h1>Список задач</h1>
+		<form action="" id="add">
+			<input type="text" placeholder="NOVIY QUEST">
+		</form>
+		<ul class="spisok">
+		</ul>
+		<div class="butoni">
+			<input type="button" value="Отметить все/отменить все" class="but checkall"><br>
+			<input type="button" value="Удалить выполненные" class="but delcheck"><br>
+			<input type="button" class="but todoDone" value="Показать выполненные"><br>
+			<input type="button" class="but todoUndone" value="Показать невыполненные"><br>
+			<input type="button" class="but todoAll" value="Показать все"><br>
+		</div>
+	</div>
+
+		<!-- Скрипт для элемента списка -->
+		<script type="text/template" id ="todoli">
+			<input type="checkbox" class="check"><label><%= title %></label> <button class="edit">Edit</button> <button class="del">Del</button>
+		</script>
+
+	<!--<script src="json2.js"></script>-->
+	<script type="text/javascript" src="jquery.js"></script>
+	<script src="underscore.js"></script>
+	<script src="backbone.js"></script>
+	<script src="backbone.localStorag.js"></script>
+	<script src="App.js"></script>
+	</body>
+</html>
