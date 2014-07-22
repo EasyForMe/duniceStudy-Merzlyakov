@@ -9,8 +9,8 @@ app.get('/', function (req, res) {
     '</head>'+
     '<body>'+
     '<form id="main" name="niceform" action="">'+
-    '<input type="text" id="forurl" placeholder="VSTAVLYAI URL SUDA" name="mess">'+
-    '<input type="button" value="KNOPKA" id="but">'+
+    '<input type="text" id="forurl" placeholder="VSTAVLYAI URL SUDA" name="mess" style="padding:6px">'+
+    '<input type="button" value="KNOPKA" id="but" style="padding:4px">'+
     '</form>'+
     '<ol class="spisok">'+
     '</ol>'+
