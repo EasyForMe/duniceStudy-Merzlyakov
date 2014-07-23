@@ -1,0 +1,30 @@
+extends base
+
+block title
+  | Sign Up
+
+block content
+  h2 Please sign up
+
+  form(action='/users', method='post')
+
+    p
+      label(for='username') Username*<br />
+      input#usersign(name='username', type='text')
+    p
+      label(for='email') E-mail*<br />
+      input#email(name='email', type='text')  
+    p
+      label(for='passsign') Password*<br />
+      input#passsign(name='passsign', type='password')
+    p
+      label(for='name') Имя<br />
+      input#name(name='name', type='text')
+    p
+      label(for='surname') Фамилия<br />
+      input#surname(name='surname', type='text')  
+    p
+      label(for='birthday') Дата рождения<br />
+      input#birthday(name='birthday', type='text')
+    p
+      input.btn.btn-primary(type='submit', value='Sign UP')
