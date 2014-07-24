@@ -1,0 +1,10 @@
+ul {
+	list-style: none;
+}
+.checked {
+	text-decoration: line-through;
+	color: red;
+}
+button, input {
+	padding:6px;
+}
