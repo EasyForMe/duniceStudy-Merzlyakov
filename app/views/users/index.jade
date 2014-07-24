@@ -17,14 +17,23 @@ block main
       th Username
       th Email
       th Created
-      th Actions
+      th Surname
+      th Birthday
     each user in users
       tr
-        td= user.name
+        td.dropdown
+          a(class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown")= user.name
+            ul.dropdown-menu(role="menu" aria-labelledby="dropdownMenu1")
+              li
+                a(role="menuitem" tabindex="-1" href="#3")= user.name 
+              li
+                a(role="menuitem" tabindex="-1" href="#")= user.username
+              li
+                a(role="menuitem" tabindex="-1" href="#")= user.email
+              li
+                a(role="menuitem" tabindex="-1" href="#")= user.created.toDateString()
         td= user.username
         td= user.email
         td= user.created.toDateString()
-        td
-          a(href='/users/#{user.id}/edit') edit
-          |  | 
-          a(href='/users/#{user.id}/destroy', onclick='return confirm("Are you sure you want to delete user #{user.username}?") ? true : false') delete
+        td= user.surname
+        td= user.birthday

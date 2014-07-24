@@ -6,25 +6,29 @@ block title
 block content
   h2 Please sign up
 
-  form(action='/users', method='post')
+  if message != ''
+    .alert.alert-error= message
+    
+  form(action='/', method='post')
 
     p
-      label(for='username') Username*<br />
-      input#usersign(name='username', type='text')
-    p
-      label(for='email') E-mail*<br />
-      input#email(name='email', type='text')  
-    p
-      label(for='passsign') Password*<br />
-      input#passsign(name='passsign', type='password')
-    p
-      label(for='name') Имя<br />
+      label(for='name') Name*<br />
       input#name(name='name', type='text')
     p
-      label(for='surname') Фамилия<br />
-      input#surname(name='surname', type='text')  
+      label(for='username') Username*<br />
+      input#username(name='username', type='text')
     p
-      label(for='birthday') Дата рождения<br />
+      label(for='email') Email*<br />
+      input#email(name='email', type='text')  
+    p
+      label(for='password') Password*<br />
+      input#password(name='password', type='password')
+    p
+      label(for='surname') Surname<br />
+      input#surname(name='surname', type='text')
+    p
+      label(for='birthday') Birthday<br />
       input#birthday(name='birthday', type='text')
     p
       input.btn.btn-primary(type='submit', value='Sign UP')
+  a.blue(href="/auth/vk") VK AUTH

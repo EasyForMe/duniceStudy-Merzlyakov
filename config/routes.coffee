@@ -1,3 +1,4 @@
+passport = require 'passport'
 module.exports = (app, passport, auth) ->
   
   # User routes
@@ -15,12 +16,23 @@ module.exports = (app, passport, auth) ->
 
   app.get '/logout', users.logout
   
-  app.get '/users', auth.requiresLogin, users.index
-  app.get '/users/new', auth.requiresLogin, users.new
-  app.post '/users', auth.requiresLogin, users.create
+  app.get '/users', users.index
+  app.get '/users/new', users.new
+  app.post '/',  users.create
   app.get '/users/:userId/edit', auth.requiresLogin, users.edit
   app.put '/users/:userId', auth.requiresLogin, users.update
-  app.get '/users/:userId/destroy', auth.requiresLogin, users.destroy
+  #app.get '/users/:userId/destroy', auth.requiresLogin, users.destroy
+  app.get "/auth/vk", passport.authenticate("vk",
+   scope: ["friends"]
+  ), 
+  (req, res) ->
+
+  app.get "/auth/vk/callback", passport.authenticate("vk",
+  failureRedirect: "/login"
+  ), (req, res) ->
+    req.user
+    users.newvk(req, res)
+    return
 
   app.param 'userId', users.user
 

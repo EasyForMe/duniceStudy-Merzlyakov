@@ -23,6 +23,12 @@ UserSchema = new Schema
   created:
     type: Date
     default: Date.now
+  surname:
+    type: String
+    default: " "
+  birthday:
+    type: String
+    default: " "
 
 #
 # Hash password before saving

@@ -23,6 +23,7 @@ exports.signup = (req, res) ->
     title: 'Sign Up'
     message: req.flash 'error'
    return
+
 #
 # Logout
 #
@@ -53,16 +54,23 @@ exports.new = (req, res) ->
 # Create user
 #
 exports.create = (req, res) ->
-  user = new User req.body
-  user.save (err) ->
-    if err
-      res.render 'users/new',
-        errors: err.errors
-        user: user
+  pattern = /^([a-z0-9_\.-])+@[a-z0-9-]+\.([a-z]{2,4}\.)?[a-z]{2,4}$/i;
+  mail = req.body.email
+  if pattern.test(mail)
+    user = new User req.body
+    user.save (err) ->
+      if err
+        res.render 'users/new',
+          errors: err.errors
+          user: user
 
-    res.redirect '/users'
-    return
-
+      res.redirect '/users'
+      return
+  else
+    req.flash 'error', 'EMAIL NEVALIDEN!'
+    res.redirect '/'
+  return
+  
 #
 # Find user by id
 #
@@ -95,19 +103,40 @@ exports.update = (req, res) ->
   user.email = req.body.email
 
   user.password = req.body.password if req.body.password
-  
-  user.save (err) ->
-    if err
-      console.log err
-      
-      res.render 'users/edit',
-        user: user
-        errors: err.errors
-    else
-      req.flash 'notice', 'User was successfully updated'
-      res.redirect '/users'
-    return
+
+  pattern = /^([a-z0-9_\.-])+@[a-z0-9-]+\.([a-z]{2,4}\.)?[a-z]{2,4}$/i;
+  mail = req.body.email
+  if pattern.test(mail)
+    user.save (err) ->
+      if err
+        console.log err
+        
+        res.render 'users/edit',
+          user: user
+          errors: err.errors
+      else
+        req.flash 'notice', 'User was successfully updated'
+        res.redirect '/users'
+      return
+  else
+    req.flash 'notice', 'EMAIL NEVALIDEN!'
+    res.redirect '/users'
   return
+
+exports.newvk = (req, res) ->
+  user = new User({
+    name: req.user.name
+    surname: req.user.surname
+    social: req.user.social
+    email: "asd@asd.asd"
+    username: req.user.username
+    password: "1111"
+    })
+  user.save (err, res) ->
+    if !err
+      console.log "ALESHKA ZAHODIT"
+  user._id = req.user._id
+  res.redirect "/"
 
 ###
 # Delete user

@@ -37,13 +37,15 @@ html(lang='en')
           a.brand(href='/') Dunice Study Project
           
           .nav-collapse.collapse
-          
             if req.user
-              p.navbar-text.pull-right
-                | Welcome, #{req.user.name}
-                | | 
-                a(href='/logout') logout
-                   
+              .navbar-text.pull-right.dropdown WELCOME, 
+                  a(class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown") #{req.user.name}
+                  ul.dropdown-menu(role="menu" aria-labelledby="dropdownMenu1")
+                    li
+                      if req.user._id != undefined
+                        a(role="menuitem" tabindex="-1" href="/users/#{req.user._id}/edit") Edit
+                    li
+                      a(role="menuitem" tabindex="-1" href="/logout") Logout
             else
               p.navbar-text.pull-right
                 a(href='/login') Login
