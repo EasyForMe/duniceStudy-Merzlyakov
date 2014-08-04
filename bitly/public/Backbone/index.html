@@ -1,0 +1,30 @@
+<DOCTYPE! html>
+<html>
+<head>
+	<title>Login</title>
+	<meta charset="utf-8">
+  <link rel="stylesheet" href="Backbone/index.css">
+</head>
+	<body>
+	<div id="main">
+	<form action="/login" id="login-form">
+	  Username: <input type="text" id="username" name="username"><br>
+	  Password: <input type="password" id="password" name="password"><br>
+	  <button id="login" type="submit">Sign Up</button>
+	</form>
+	
+	<ul id="result">
+	</ul>
+	</div>
+	
+	<script type="text/template" id ="todoli">
+		<span><%= username %></span> 
+		<span><%= password %></span>
+	</script>
+	<script type="text/javascript" src="../jquery.js"></script>
+	<script src="../underscore.js"></script>
+	<script src="../backbone.js"></script>
+	<script src="../backbone.localStorag.js"></script>
+	<script src="Backbone/index.js"></script>
+	</body>
+</html>
