@@ -11,6 +11,7 @@ $(function() {
   };
 
   App.Models.Todo = Backbone.Model.extend({
+    url: 'http://localhost:1337/todos'
     defaults: {
       title: "TI JE NICHO NE NAPISAL!!",
       done: false
