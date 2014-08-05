@@ -7,19 +7,28 @@
 </head>
 	<body>
 	<div id="main">
-	<form id="login-form">
-	  Username: <input type="text" id="username" name="username"><br>
-	  Password: <input type="password" id="password" name="password"><br>
-	  <button id="login" type="submit">Sign Up</button>
-	</form>
 	
-	<ul id="result">
-	</ul>
+	<table class="gu1">
+		<tr>
+			<th>Команда 1</th>
+		</tr>
+	</table>
+
+	<table class="gu2">
+		<tr>
+			<th>Команда 2</th>
+		</tr>
+	</table>
+
+	<table id="result">
+		<th>
+			Участники
+		</th>
+	</table>
 	</div>
 	
 	<script type="text/template" id ="todoli">
-		<span><%= username %> </span> 
-		<span> <%= password %></span>
+			<td class="gu"><%= username%></td>
 	</script>
 	<script type="text/javascript" src="../jquery.js"></script>
 	<script src="../underscore.js"></script>

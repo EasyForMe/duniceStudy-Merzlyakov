@@ -8,3 +8,6 @@ ul {
 button, input {
 	padding:6px;
 }
+table {
+	display: inline-block;
+}
