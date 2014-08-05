@@ -1,6 +1,7 @@
 var express  = require('express');
 var mongoCol = require('./mongoCol');
 var LolModel = require('./mongoCol').LolModel;
+var LoginModel = require('./mongoCol').LoginModel;
 var app = express();
 
 app.use(express.static(__dirname + '/public'));
@@ -12,6 +13,10 @@ app.get('/', function (req, res) {
 
 app.get('/todo', function(req, res) {
   res.sendfile(__dirname + '/public/Todo/App.html');
+});
+
+app.get('/form', function(req, res) {
+  res.sendfile(__dirname + '/public/Backbone/index.html');
 });
 
 app.get('/about', function(req, res) {
@@ -31,6 +36,23 @@ app.get('/test', function(req, res){
 
   plusDB.save(function(err, entry) {
     if (err) return console.error(err);
+  });
+});
+app.get ('/login', function(req, res) {
+    var uname = req.query.username;
+    var pass = req.query.password;
+    console.log('plusLog');
+
+  var plusLog = new LoginModel({
+    username: uname,
+    password: pass
+  });
+
+  plusLog.save(function(err, entry) {
+    if (err) return console.error(err);
+    else {
+	res.redirect('/');
+    }
   });
 });
 
